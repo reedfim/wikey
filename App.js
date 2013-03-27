@@ -1,0 +1,4 @@
+var AppBox = function(){
+
+};
+
