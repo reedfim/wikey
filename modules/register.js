@@ -3,5 +3,13 @@
 Application.modules = Application.modules || {};
 
 Application.modules.register = function(box){
-	
+	var _storage = window.localStorage;
+
+	box.setItem = function(key, value){
+
+	};
+	box.getItem = function(key){
+
+	};
+
 };
