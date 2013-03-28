@@ -2,7 +2,7 @@
 
 Application.modules = Application.modules || {};
 
-Application.modules.keyCatcher = function(box){
+Application.modules.keyListener = function(box){
 	var _win = window,
 		_duplKeyCode = -1, //일반적인 키는 중복으로 눌리기 때문에 한번만 켓치할 수 있도록 확인하는 변수
 		_fromCh = String.fromCharCode,
@@ -10,9 +10,10 @@ Application.modules.keyCatcher = function(box){
 		_keyNamePair = Application.models.keyNamePair;
 		
 
-	box.bindKeyEvent = function(){
+	box.listen = function(){
 		console.log('bind keydown event');
-		$(_win).on('keydown', function(e){
+		//등록된 Key Event handler를 없애고, 재 등록한다.
+		$(_win).off('keydown').on('keydown', function(e){
 			var keyCode = e.keyCode || e.which,
 				keyName = '';
 			
@@ -34,7 +35,7 @@ Application.modules.keyCatcher = function(box){
 		return this;
 	};
 
-	box.regEventCallback = function(func){
+	box.getKey = function(func){
 		_callback = func;
 	};
 

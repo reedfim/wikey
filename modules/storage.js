@@ -2,7 +2,7 @@
 //필요있을지 없을지 아직 모르겠다.
 Application.modules = Application.modules || {};
 
-Application.modules.register = function(box){
+Application.modules.storage = function(box){
 	var _storage = window.localStorage;
 
 	box.setItem = function(key, value){
