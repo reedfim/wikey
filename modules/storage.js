@@ -3,13 +3,13 @@
 Application.modules = Application.modules || {};
 
 Application.modules.storage = function(box){
-	var _storage = window.localStorage;
+	var _storage = localStorage;
 
-	box.setItem = function(key, value){
+	box.backup = function( data ){
 
 	};
-	box.getItem = function(key){
-
+	box.restore = function(){
+		return {on : '최초 로딩된것임'};
 	};
 
 };

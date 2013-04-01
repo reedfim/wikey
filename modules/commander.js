@@ -3,16 +3,20 @@ Application.modules = Application.modules || {};
 
 Application.modules.commander = function(box){
 	
+
 	box.command = function( order ){
 
 	};
 
-	box.analyze = function( data, callback ){
+	box.isValid = function( data ){
 		var order = null;
 		//키 데이터를 분석해야한다.
 
-		if( callback && typeof callback === 'function' ){
-			callback.call(this, order);
-		}
+	
 	};
+
+	box.getOrder = function(){
+
+
+	}
 };
