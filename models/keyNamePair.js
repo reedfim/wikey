@@ -6,10 +6,10 @@ Application.models.keyNamePair = (function(){
 		nameValuePair = {},
 		i, fromChar = String.fromCharCode;
 
-	nameValuePair['16'] = 'shift';
-	nameValuePair['17'] = 'ctrl';
-	nameValuePair['18'] = 'alt';
-	nameValuePair['91'] = 'meta';
+	nameValuePair['16'] = 'shiftKey';
+	nameValuePair['17'] = 'ctrlKey';
+	nameValuePair['18'] = 'altKey';
+	nameValuePair['91'] = 'metaKey';
 
 	for (i = flag.START_CHAR_CODE; i <= flag.END_CHAR_CODE; i++) {
 		nameValuePair[i] = fromChar(i);

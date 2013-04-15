@@ -1,5 +1,11 @@
 //키 이벤트를 켓치하는 모듈
-
+chrome.runtime.onMessage.addListener(
+		function(request, sender, sendResponse){
+			console.log(request.data, sender);
+			//runView.js에서 단축키가 바로 바뀌면, 현재 탭을 새로고침 할 필요 없이, 최신 데이터를 바로 받아 model에 적용한다.
+			Application.models.cmdList.set(request.data);
+		}
+	);
 Application.modules = Application.modules || {};
 
 Application.modules.keyListener = function(box){

@@ -5,19 +5,32 @@
   "description": "you will be able to more easily use the WIKI",
   "version": "1.0",
   "background": {
+
     "scripts": ["background.js"]
   },
   "browser_action": {
-    "default_icon": "icon/icon.png",
-    "default_popup": "runView.html"
+    "default_icon": "icon/icon.png"
+    
   },
   "content_scripts": [{
     "matches": ["http://play.daumcorp.com/*"],
-    "js": ["lib/jquery-1.9.1.min.js", "Application.js", "models/flag.js","models/keyNamePair.js","models/cmdList.js", "modules/keyListener.js", "modules/storage.js", "modules/commander.js", "runCommand.js"],    
+    "js": [
+            "lib/jquery-1.9.1.min.js", 
+            "Application.js", 
+            "models/flag.js",
+            "models/keyNamePair.js",
+            "models/cmdList.js", 
+            "modules/keyListener.js", 
+            "modules/storage.js", 
+            "modules/commander.js",
+            "modules/viewer.js",
+            "runCommand.js"
+          ],    
     "run_at": "document_end"
   }],
   "permissions": [
-    "http://play.daumcorp.com/*"
+    "tabs",
+    "storage"
   ]
   
 }

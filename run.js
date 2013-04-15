@@ -1,11 +1,6 @@
 $(function(){
-	chrome.runtime.onMessage.addListener(
-		function(request, sender, sendResponse){
-			console.log(request.data, sender);
-			//runView.js에서 단축키가 바로 바뀌면, 현재 탭을 새로고침 할 필요 없이, 최신 데이터를 바로 받아 model에 적용한다.
-			Application.models.cmdList.set(request.data);
-		}
-	);
+	var currentMode = 'not changed';
+	
 	//초기화
 	//여기서 flag의 RUN_MODE를 변경할 수 있다.
 	Application(['keyListener','storage','commander'], function(box){
@@ -28,7 +23,12 @@ $(function(){
 			box.isValid();
 		});
 		
-		//크롬익스텐션 코드를 적절히 섞어야 한다.
+		//익스텐션 아이콘을 선택할때마다의 모드 체인지
+		chrome.runtime.onMessage.addListener(
+			function(request, sender, sendResponse){
+				
+			}
+		);
 	});
 
 });
