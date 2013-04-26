@@ -19,6 +19,7 @@ Application(['keyListener','storage','commander','viewer'], function(box){
 		
 		if(flag.CURRENT_MODE === 'VIEW'){
 			console.log('view다.');
+			box.setDataOnView(keyData.keyName);
 		
 		}else if(flag.CURRENT_MODE === 'COMMAND'){
 			box.isValid();	
