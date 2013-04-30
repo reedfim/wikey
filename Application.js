@@ -20,12 +20,18 @@ function Application(){
 			}
 		}
 	}
-
+	
+	var param = [];
 	for (i = 0, len = modules.length; i < len; i++ ) {
-		Application.modules[modules[i]](this);
+		//this에 추가를 하는것이 좋은지 아닌지는 확실히 모르겠다.
+		if(Application.modules[modules[i]]){
+			param.push(this[modules[i]] = Application.modules[modules[i]]());	
+		}else if(Application.models[modules[i]]){
+			param.push(this[modules[i]] = Application.models[modules[i]]());	
+		}		
 	}
 
-	callback(this);
+	callback.apply(this,param);
 };
 
 Application.prototype = {

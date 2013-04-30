@@ -1,0 +1,85 @@
+#wikeyPanel {
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    
+    opacity: 0.5;
+    overflow: hidden;
+}
+
+#wikeyPanel.hide {
+    display:none;
+}
+#wikeyPanel .bg_dimmed {
+    overflow: hidden;
+    background-color:#000;
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:1;
+    opacity: 0.5;
+}
+#wikeyPanel .bg_dimmed * {
+    color: transparent !important;
+    text-shadow: 0 0 8px grey !important;
+    text-decoration: none;
+
+}
+
+#wikeyPanel .fg_view {
+    position:absolute;
+    left:0;right:0;
+    width:100%;height:100%;
+    z-index:2;
+}
+
+#wikeyPanel .box_control {
+    margin:200px auto 0;
+    width:500px;
+
+}
+
+#wikeyPanel .btn_group {
+    float:left;
+}
+
+
+#wikeyPanel .inp_gorup {
+    float:right;
+}
+
+#wikeyPanel .comm {
+    height:50px;
+}
+#wikeyPanel .btn {
+    display:block;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background-color:#0044cc;
+    color:#ffffff;
+    border: 1px solid #cccccc;
+    width:100px;
+}
+#wikeyPanel .txt_cmd {
+    width:350px;
+    height:100%;
+    display:inline-block;
+    background-color: #fff;
+    border:1px solid #ccc;
+    font-weight: bold;
+    font-size:30px;
+    text-align: center;
+    line-height:50px;
+    color:#000;
+}
+#wikeyPanel .txt_cmd.focus {
+    box-shadow: inset 3px 3px 3px #f00, inset -3px -3px 3px #f00;
+}
+
+
+
