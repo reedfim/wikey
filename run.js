@@ -14,11 +14,13 @@ Application(['keyListener','commander','assignor', 'Data'], function(keyListener
 		commander.init(new Data()).active();
 	}
 	
-	
 
 	// 키 이벤트를 가져오기 위해 키 이벤트를 등록한다.
-	keyListener.listen().getKey(function( data ){
-		keyData = data;
+	keyListener.listen().setHandler( keyDownHandler );
+
+
+	function keyDownHandler( data ){
+		keyData = data.keys;
 		console.log('콜백으로 받아온 데이터 : ',keyData);
 		
 		if(CURRENT_MODE === 'ASSIGN'){
@@ -29,10 +31,10 @@ Application(['keyListener','commander','assignor', 'Data'], function(keyListener
 			console.log('commander 객체의 함수 수행');
 			commander.command(keyData);	
 		}
-	});
-
-
-
+	}
+	function keyUpHandler( data ){
+		console.log('key up data : ', data.keys);
+	}
 
 
 

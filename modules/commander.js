@@ -29,32 +29,21 @@ Application.modules.commander = function(base){
 
 	var prevKeyCode = {};
 	//많은 고민이 필요할듯하다.. 이부분은,,
-	module.command = function( keyData ){
-		for(var key in cmdData){
-			cmd = cmdData[key];
-			runable[key] = runable[key] ? runable[key] && cmd.actions[keyData.keyName] : cmd.actions[keyData.keyName];
-			
-			if(!prevKeyCode[key]){
-				eachCmdKeyCnt[key] = eachCmdKeyCnt[key] ? eachCmdKeyCnt[key] + 1 : 1;	
-				prevKeyCode[key] = keyData.keyCode;
-			}else if(prevKeyCode[key] && (prevKeyCode[key] !== keyData.keyCode)){
-				eachCmdKeyCnt[key] = eachCmdKeyCnt[key] ? eachCmdKeyCnt[key] + 1 : 1;	
-				prevKeyCode[key] = keyData.keyCode;
-			}else if(prevKeyCode[key] && prevKeyCode === keyData.keyCode){
-				prevKeyCode[key] = keyData.keyCode;
-			}
-			
-			console.log(eachCmdKeyCnt);
-			if(runable[key]){
-				if(eachCmdKeyCnt[key] === cmd.keyCnt){
-					console.log('action : '+key);	
-					runable = {};
-					eachCmdKeyCnt = {};		
-				}else if(eachCmdKeyCnt[key] > cmd.keyCnt){
-					eachCmdKeyCnt = {};				
+	module.command = function( pressedKeys ){
+		for(var ckey in cmdData){
+			cmd = cmdData[ckey];
+			if(pressedKeys && $.type(pressedKeys) === 'array'){
+				var isAction = true;
+				for( rkey in cmd.actions ){
+					isAction = isAction && pressedKeys[rkey];
+				}
+				if(isAction){ //cmd.actions라는 데이터가 없을때는 무조건 명령이 실행되는 버그가 있다. 수정하자.
+					console.log(ckey +' 명령실행');
+				}else{
+					console.log(ckey +' 단축키 아님');
+					isAction = true;
 				}
 			}
-
 		}
 	};
 

@@ -21,13 +21,16 @@ function Application(){
 		}
 	}
 	
-	var param = [];
+	var param = [],
+		ml = Application.modules,
+		md = Application.models;
 	for (i = 0, len = modules.length; i < len; i++ ) {
 		//this에 추가를 하는것이 좋은지 아닌지는 확실히 모르겠다.
-		if(Application.modules[modules[i]]){
-			param.push(this[modules[i]] = Application.modules[modules[i]]());	
-		}else if(Application.models[modules[i]]){
-			param.push(this[modules[i]] = Application.models[modules[i]]());	
+		if(ml[modules[i]]){
+			param.push(this[modules[i]] =ml[modules[i]]());	
+			
+		}else if(md[modules[i]]){
+			param.push(this[modules[i]] = md[modules[i]]());	
 		}		
 	}
 
