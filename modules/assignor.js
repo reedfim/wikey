@@ -58,12 +58,18 @@ Application.modules.assignor = function(base){
 		return this;
 	};
 
-	module.setDataOnView = function( keyData ){
+	module.setDataOnView = function( pressedKeys ){
 		if(selectedInpBox != null){
 			var key = selectedInpBox.data('menu');
-			if(cmdData[key].keyCnt++ < 5){ // 5글자까지만 입력되게 함.
-				keyString = keyString === '' ? keyString.concat(keyData.keyName) : keyString.concat('+',keyData.keyName);
-				selectedInpBox.html(keyString);
+			var count = 0, keyText = '';
+			for(var key in pressedKeys){
+				count++;
+				keyText += (key + ' + ');
+			}
+			keyText = keyText.substr(0, keyText.length-3);
+
+			if(count <= 4){ // 최대 4글자까지만 입력되게 함.
+				selectedInpBox.html(keyText);
 			}
 		}		
 	};

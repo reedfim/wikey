@@ -11,7 +11,7 @@ Application.modules.keyListener = function(base){
 		_downHandler = null,
 		_upHandler = null,
 		_keyNamePair = Application.prototype.keyNamePair,
-		_pressedKeys = [];
+		_pressedKeys = {};
 		
 
 	module.listen = function(){
@@ -24,7 +24,7 @@ Application.modules.keyListener = function(base){
 			if ((keyCode >= 65 && keyCode <= 90) || (keyCode >=48 && keyCode <=57)){ //A-Z || 0-9
 				if(_duplKeyCode !== keyCode) {
 					_duplKeyCode = keyCode;
-
+					
 					_pressedKeys[ _keyNamePair[keyCode] ] = keyCode;
 
 					runDownHandler(_pressedKeys);

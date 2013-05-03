@@ -12,7 +12,7 @@ Application.modules.commander = function(base){
 
 	module.init = function( data ){
 		cmdData = data;
-
+		console.log(cmdData);
 		//TEST
 		cmdData['leftmenu'].keyCnt = 3;
 		cmdData['leftmenu'].cmdStr = 'alt|shift|C';
@@ -27,21 +27,22 @@ Application.modules.commander = function(base){
 	};
 
 
-	var prevKeyCode = {};
+	var ckey, rkey, isAction, count;
 	//많은 고민이 필요할듯하다.. 이부분은,,
 	module.command = function( pressedKeys ){
-		for(var ckey in cmdData){
+		for( ckey in cmdData ){
 			cmd = cmdData[ckey];
-			if(pressedKeys && $.type(pressedKeys) === 'array'){
-				var isAction = true;
+			if(pressedKeys && $.type(pressedKeys) === 'object'){
+				isAction = true;
+				count = 0;
 				for( rkey in cmd.actions ){
 					isAction = isAction && pressedKeys[rkey];
+					count++;
 				}
-				if(isAction){ //cmd.actions라는 데이터가 없을때는 무조건 명령이 실행되는 버그가 있다. 수정하자.
+				if(isAction && count === cmd.keyCnt){ //cmd.actions라는 데이터가 없을때는 무조건 명령이 실행되는 버그가 있다. 수정하자.
 					console.log(ckey +' 명령실행');
 				}else{
 					console.log(ckey +' 단축키 아님');
-					isAction = true;
 				}
 			}
 		}

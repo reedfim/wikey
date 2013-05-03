@@ -1,17 +1,20 @@
 //초기화
-Application(['keyListener','commander','assignor', 'Data'], function(keyListener, commander, assignor, Data){
+Application(['keyListener','commander','assignor', 'SharedData'], function(keyListener, commander, assignor, SharedData){
 	
-	var CURRENT_MODE = 'COMMAND';//'ASSIGN';
-	console.log('init', this, new Data());	
+	var CURRENT_MODE = 'ASSIGN';//'ASSIGN';
+	console.log('init', this, new SharedData());	
 
-	var keyData;
+
+
+	var keyData,
+		sharedCmdData = new SharedData();
 
 	if(CURRENT_MODE === 'ASSIGN'){
-		assignor.init(new Data()).active();
-		commander.init(new Data());	
+		assignor.init(sharedCmdData).active();
+		commander.init(sharedCmdData);	
 	}else{
-		assignor.init(new Data());
-		commander.init(new Data()).active();
+		assignor.init(sharedCmdData);
+		commander.init(sharedCmdData).active();
 	}
 	
 
