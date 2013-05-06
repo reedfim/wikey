@@ -26,8 +26,9 @@ function Application(){
 		md = Application.models;
 	for (i = 0, len = modules.length; i < len; i++ ) {
 		//this에 추가를 하는것이 좋은지 아닌지는 확실히 모르겠다.
+		var m = this[modules[i]] = {}
 		if(ml[modules[i]]){
-			param.push(this[modules[i]] =ml[modules[i]]());	
+			param.push(this[modules[i]] = ml[modules[i]]());	
 			
 		}else if(md[modules[i]]){
 			param.push(this[modules[i]] = md[modules[i]]());	

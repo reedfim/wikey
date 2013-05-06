@@ -1,80 +1,73 @@
+(function(){
 
-Application.modules = Application.modules || {};
-
-Application.modules.keyListener = function(base){
-	var module = base != null ? $.extend(module, base) : {};
-
-	var _win = window,
-		_duplKeyCode = -1, //일반적인 키는 중복으로 눌리기 때문에 한번만 켓치할 수 있도록 확인하는 변수
-		_duplFuncCode = -1,
-		_fromCh = String.fromCharCode,
-		_downHandler = null,
-		_upHandler = null,
-		_keyNamePair = Application.prototype.keyNamePair,
-		_pressedKeys = {};
+	var duplKeyCode = -1, //일반적인 키는 중복으로 눌리기 때문에 한번만 켓치할 수 있도록 확인하는 변수
+		duplFuncCode = -1,
+		fromCh = String.fromCharCode,
+		downHandler = null,
+		upHandler = null,
+		pressedKeys = {};
 		
 
-	module.listen = function(){
+	function _listen(){
 		console.log('bind keydown event');
 		//등록된 Key Event handler를 없애고, 재 등록한다.
-		$(_win).on('keydown', function(e){
+		$(window).on('keydown', function(e){
 			
 			var keyCode = e.keyCode || e.which;
 			
 			if ((keyCode >= 65 && keyCode <= 90) || (keyCode >=48 && keyCode <=57)){ //A-Z || 0-9
-				if(_duplKeyCode !== keyCode) {
-					_duplKeyCode = keyCode;
+				if(duplKeyCode !== keyCode) {
+					duplKeyCode = keyCode;
 					
-					_pressedKeys[ _keyNamePair[keyCode] ] = keyCode;
+					pressedKeys[ keyNamePair[keyCode] ] = keyCode;
 
-					runDownHandler(_pressedKeys);
+					runDownHandler(pressedKeys);
 				}
 			}else if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) {
-				if(_duplFuncCode !== keyCode){
-					_duplFuncCode = keyCode;
+				if(duplFuncCode !== keyCode){
+					duplFuncCode = keyCode;
 
-					_pressedKeys[ _keyNamePair[keyCode] ] = keyCode;					
-					runDownHandler(_pressedKeys);	
+					pressedKeys[ keyNamePair[keyCode] ] = keyCode;					
+					runDownHandler(pressedKeys);	
 				}
 			}					
 
 		});
 
-		$(_win).on('keyup', function(e){
+		$(window).on('keyup', function(e){
 			var keyCode = e.keyCode || e.which;
 
-			_duplFuncCode = -1;
-			_duplKeyCode = -1;
+			duplFuncCode = -1;
+			duplKeyCode = -1;
 			
-			delete _pressedKeys[ _keyNamePair[keyCode] ];
-
-			runUpHandler(_pressedKeys);	
+			delete pressedKeys[ keyNamePair[keyCode] ];
 
 		});
 
-		return this;
+		$(window).on('blur', function(e){
+			duplFuncCode = -1;
+			duplKeyCode = -1;
+			
+			pressedKeys = {};
+		})
 	};
 
-	module.setHandler = function(downHandler, upHandler){
-		_downHandler = downHandler != null ? downHandler : null;
-		_upHandler = upHandler != null ? upHandler : null;
+	//내부에서만 쓰일 함수
+	function runDownHandler( keyData ){
+		O.notifyObserver('*.updateKeyData', {
+			type : MODE.current === MODE_TYPE.REG ? O.type.KEY_IN_REG : O.type.KEY_IN_CMD,
+			keys : keyData
+		});
+	}
+
+	return {
+		listen : _listen
 	};
 
-	function runDownHandler( transData ){
-		if(_downHandler && typeof _downHandler === 'function') {
-			_downHandler.call(this, {
-				keys : transData
-			});
-		}
-	}
-	function runUpHandler( transData ){
-		if(_upHandler && typeof _upHandler === 'function') {
-			_upHandler.call(this, {
-				keys : transData
-			});
-		}
-	}
+})().listen();
 
-	return module;
 
-};
+
+
+
+

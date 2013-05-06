@@ -15,17 +15,15 @@
     "matches": ["http://play.daumcorp.com/*"],
     "js": [
             "lib/jquery-1.9.1.min.js", 
-            "Application.js", 
-            "models/flag.js",
-            "models/keyNamePair.js",
-            "models/cmdList.js", 
+            "Observer.js", 
+            "global/common.js",
             "modules/keyListener.js", 
-            "modules/storage.js", 
             "modules/commander.js",
-            "modules/viewer.js",
+            "modules/indicator.js",
+            "modules/register.js",
             "run.js"
           ],
-    "css" : ["modules/viewer.css", "modules/commander.css"],    
+    "css" : ["modules/register.css", "modules/commander.css", "modules/indicator.css"],    
     "run_at": "document_end"
   }],
   "permissions": [
