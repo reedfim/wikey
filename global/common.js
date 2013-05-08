@@ -34,17 +34,13 @@ var keyNamePair = (function(){
 //로컬스토리지에 있는 커맨드 데이터를 조작한다.
 var storageData = (function(){
 	
-	if( !localStorage.getItem('cmdList') ){
+	if( !localStorage.getItem('firstExecute') ){
 		localStorage.clear();
-		localStorage.setItem('cmdList',['sidebar', 'edit', 'preview', 'richtext', 'markup', 'save'].join('|'));	
+		localStorage.setItem('firstExecute', 'NO');	
 	}
 	
-	var list = localStorage.getItem('cmdList').split('|'),
-		datas = {};
+	var datas = {};
 
-	function getCmdList(){
-		return list;
-	}
 	function get(name){
 
 		return datas[name];
@@ -62,7 +58,7 @@ var storageData = (function(){
 
 	//Initialized
 	function _init(){
-		$.each(list, function(index, name){
+		$.each(wikiActions.getList(), function(index, name){
 			var d = localStorage.getItem(name);
 			
 			if(d){
@@ -84,8 +80,7 @@ var storageData = (function(){
 
 		return {
 			get : get,
-			set : set,
-			getCmdList : getCmdList
+			set : set
 		};
 	}
 

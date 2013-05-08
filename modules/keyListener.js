@@ -55,7 +55,7 @@ var keyListener = (function(){
 	//내부에서만 쓰일 함수
 	function runDownHandler( keyData ){
 		O.notifyObserver('*.updateKeyData', {
-			type : MODE.current === MODE_TYPE.REG ? O.type.KEY_IN_REG : O.type.KEY_IN_CMD,
+			type : CURRENT_MODE === MODE_TYPE.REG ? O.type.KEY_IN_REG : O.type.KEY_IN_CMD,
 			keys : keyData
 		});
 	}

@@ -16,6 +16,7 @@
     "js": [
             "lib/jquery-1.9.1.min.js", 
             "Observer.js", 
+            "global/actionObjects.js",
             "global/common.js",
             "modules/keyListener.js", 
             "modules/commander.js",

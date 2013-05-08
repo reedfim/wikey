@@ -72,7 +72,7 @@ var register = (function Register(){
 	//Initialized
 	function _init(){
 		cmdData = {};
-		$.each(storageData.getCmdList(), function(i, name){
+		$.each(wikiActions.getList(), function(i, name){
 			cmdData[name] = storageData.get(name);
 		});
 

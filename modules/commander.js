@@ -3,7 +3,6 @@ var commander = (function(){
 	
 	var storage = localStorage;
 		cmdData = null,
-		cmdToAction = {},
 		runable = {}, // 각 기능마다 단축키가 매칭이 되면 true, 아닐경우 false
 		eachCmdKeyCnt = {}; //각 기능마다 등록된 단축키의 수를 체크 - runable, eachCmdKeyCnt가 모두 맞아야 한다.
 
@@ -22,11 +21,13 @@ var commander = (function(){
 				}
 				if(isAction && count === cmd.keyCnt){ //cmd.actions라는 데이터가 없을때는 무조건 명령이 실행되는 버그가 있다. 수정하자.
 					console.log(ckey +' 명령실행');
-					cmdToAction[ckey].trigger();
+					
 					O.notifyObserver('indicator',{
 						type : O.type.SHOW_INDICATOR,
 						title : ckey
 					});
+
+					wikiActions[ckey](); //해당 단축키에 대한 액션 실행
 
 				}else{
 					console.log(ckey +' 단축키 아님');
@@ -43,7 +44,7 @@ var commander = (function(){
 
 			//엑티베이션 코드
 			cmdData = {};
-			$.each(storageData.getCmdList(), function(i, name){
+			$.each(wikiActions.getList(), function(i, name){
 				cmdData[name] = storageData.get(name);
 			});
 		}
@@ -59,61 +60,10 @@ var commander = (function(){
 	//Initialized
 	function _init(  ){
 		cmdData = {};
-		var list = storageData.getCmdList();
-		$.each(list, function(i, name){
+		$.each(wikiActions.getList(), function(i, name){
 			cmdData[name] = storageData.get(name);
 		});
-
-		console.log(cmdData);
-
-		// 실제 수행해야 하는 작업을 모아놓은 객체	
-		$.each(list, function(i, name){
-			var func = null;
-			switch(name){
-				case 'sidebar' :
-					console.log('sidebar');
-					func = function(){
-						$('#splitter-button').trigger('click');
-					}
-				break;
-				case 'edit' :
-					console.log('edit');
-					func = function(){
-						location.href = $('#editPageLink').attr('href');		
-					}	
-				break;
-				case 'preview' :
-					func = function(){
-						console.log('preview');
-						$('#previewTab a').trigger('click');
-					}
-				break;
-				case 'richtext' :
-					func = function(){
-						console.log('richtext');
-						$('#wysiwygTab a').trigger('click');
-					}
-				break;
-				case 'markup' :
-					func = function(){
-						console.log('markup');
-						$('#markupTab a').trigger('click');
-					}
-				break;
-				case 'save' :
-					console.log('save');
-					func = function(){
-						$('#editpageform').submit();
-					}					
-				break;
-			}
-
-			cmdToAction[name] = {
-				trigger : func
-			};			
-			
-		})
-		console.log(cmdToAction);
+		console.log(cmdData);		
 
 		//옵저버 추가
 		O.addObserver('commander').add(updateKeyData).add(active).add(deactive);
