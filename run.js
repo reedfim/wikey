@@ -1,6 +1,12 @@
 //초기화
 console.log('init');	
 
+//모듈 초기화
+keyListener.listen();
+commander.init();
+register.init();
+indicator.init();
+
 var MODE = {
 	current : 'CMD'
 };

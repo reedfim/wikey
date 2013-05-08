@@ -1,4 +1,4 @@
-(function(){
+var keyListener = (function(){
 
 	var duplKeyCode = -1, //일반적인 키는 중복으로 눌리기 때문에 한번만 켓치할 수 있도록 확인하는 변수
 		duplFuncCode = -1,
@@ -64,7 +64,7 @@
 		listen : _listen
 	};
 
-})().listen();
+})();
 
 
 

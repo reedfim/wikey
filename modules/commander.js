@@ -1,5 +1,5 @@
 //위키에 명령을 내리는 모듈
-(function(){
+var commander = (function(){
 	
 	var storage = localStorage;
 		cmdData = null,
@@ -54,9 +54,6 @@
 			//디엑티베이션 코드
 		}
 	};
-
-	//옵저버 추가
-	O.addObserver('commander').add(updateKeyData).add(active).add(deactive);
 
 
 	//Initialized
@@ -117,13 +114,16 @@
 			
 		})
 		console.log(cmdToAction);
+
+		//옵저버 추가
+		O.addObserver('commander').add(updateKeyData).add(active).add(deactive);
 	};
 
 	return {
 		init : _init
 	}
 
-})().init();
+})();
 
 
 

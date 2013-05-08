@@ -8,13 +8,13 @@ var Observers = (function(){
 	var _obs_ = {},
 		_ref_obs_ = {};
 
-	return {
+	return { //옵저버들을 관리하는 객체에 각각의 옵저버를 등록하거나 실행시키거나 삭제하는 메소드들을 리턴
 		addObserver : function Observer(obId, refIdSelf){ //obId, refIdSelf-id값의 this
 			if(!obId || $.type(obId) !== 'string') return;
 			var eachObserver = _obs_[obId] = ( _obs_[obId] ? _obs_[obId] : {} );
 			refIdSelf && ( _ref_obs_[obId] = refIdSelf );
 
-			return {
+			return { //각 옵저버 객체에 연결되어 수행되는 함수를 등록하는 메소드들을 리턴
 				add : function(func){
 					if(func && $.type(func) === 'function'){
 						eachObserver[func.name || new Date().getTime()] = func;
@@ -41,17 +41,23 @@ var Observers = (function(){
 			} 
 		}, //addObserver
 		notifyObserver : function(obId, data){ //obId는 선택, data는 필수
-			if( (obId && $.type(obId) === 'string') && (data && typeof data === 'object') ){				
+			if( (obId && $.type(obId) === 'string') && (data && typeof data === 'object') ){
 				var chkIds = obId.split('.');
-				if(chkIds[0] === '*'){ // *.funcname
+				if(chkIds[0] === '*' ){ // *.funcname
 					for(var o in _obs_){
-						if(chkIds[1]){
+						if(chkIds[1] && chkIds[1] !== '*'){
+							console.log('*.x');
 							_obs_[o][chkIds[1]] && _obs_[o][chkIds[1]].call(_ref_obs_[o], data);
+						}else{
+							console.log('*.* or *');
+							$.each(_obs_[o], function(i, func){
+								func.call(_ref_obs_[o], data);
+							});
 						}
 					}
 				}else{
 					var eachObserver = _obs_[chkIds[0]];
-				
+					console.log('X.x or X');
 					if(eachObserver && chkIds[1]){
 						eachObserver[chkIds[1]] && eachObserver[chkIds[1]].call(_ref_obs_[chkIds[0]], data);
 					}else{
@@ -61,7 +67,8 @@ var Observers = (function(){
 					}	
 				}			
 			
-			}else if(obId && $.type(obId) === 'object' && !data){ //golbal
+			}else if( obId && $.type(obId) === 'object' && !data){ //golbal
+				console.log(' obid empty');
 				var tempData = obId;
 				for(var o in _obs_){
 					$.each(_obs_[o], function(i, func){
@@ -76,10 +83,17 @@ var Observers = (function(){
 				delete _ref_obs_[obId];
 			}
 		}, //removeObserver
-		getObserverList : function(){
+		getObserverList : function(){ //옵저버 리스트를 배열로 리턴
 			var list = [];
-			$.each(_obs_, function(id){
-				list.push(id);
+			$.each(_obs_, function(obName, obObj){
+				var funcs = [];
+				$.each(obObj, function(funcName){
+					funcs.push(funcName);
+				})
+				list.push({
+					observer : obName,
+					functions : funcs
+				});
 			});
 
 			return list;

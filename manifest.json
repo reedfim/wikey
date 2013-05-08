@@ -23,7 +23,7 @@
             "modules/register.js",
             "run.js"
           ],
-    "css" : ["modules/register.css", "modules/commander.css", "modules/indicator.css"],    
+    "css" : ["modules/register.css", "modules/indicator.css"],    
     "run_at": "document_end"
   }],
   "permissions": [

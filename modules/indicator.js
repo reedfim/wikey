@@ -1,4 +1,4 @@
-(function indicator(){
+var indicator = (function indicator(){
 
 	var $indicator;
 	var $panel;
@@ -23,10 +23,6 @@
 	}
 
 
-	//옵저버 등록
-	O.addObserver('indicator').add(show);
-
-
 	function _init(){
 		var html = '<div class="wikey_cmd_bg"><div class="wikey_indicator"></div></div>';
 		$panel = $(html);
@@ -34,10 +30,13 @@
 		$indicator = $panel.find('.wikey_indicator');
 
 		$(document.body).append($panel);
+
+		//옵저버 등록
+		O.addObserver('indicator').add(show);
 	}
 
 	return {
 		init : _init
 	};
 
-})().init();
+})();

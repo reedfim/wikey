@@ -1,6 +1,6 @@
 
 //뷰어는 등록할때 화면에 보여주는 역할만 한다.
-(function Register(){
+var register = (function Register(){
 
 	var storage = localStorage,
 		cmdData = null;
@@ -67,8 +67,7 @@
 			storageData.set(menu, saveCmd);
 		}
 	}
-	//옵저버 추가
-	O.addObserver('register').add(updateKeyData).add(active).add(deactive);
+	
 
 	//Initialized
 	function _init(){
@@ -119,13 +118,16 @@
 		});
 
 		$(document.body).append($viewPanel);
+
+		//옵저버 추가
+		O.addObserver('register').add(updateKeyData).add(active).add(deactive);
 	};
 
 	return {
 		init : _init
 	};
 
-})().init();
+})();
 
 
 
