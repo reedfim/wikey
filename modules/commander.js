@@ -21,13 +21,14 @@ var commander = (function(){
 				}
 				if(isAction && count === cmd.keyCnt){ //cmd.actions라는 데이터가 없을때는 무조건 명령이 실행되는 버그가 있다. 수정하자.
 					console.log(ckey +' 명령실행');
-					
-					O.notifyObserver('indicator',{
-						type : O.type.SHOW_INDICATOR,
-						title : ckey
-					});
+					if(wikiActions[ckey].enabled()){
+						O.notifyObserver('indicator',{
+							type : O.type.SHOW_INDICATOR,
+							title : wikiActions[ckey].title
+						});
 
-					wikiActions[ckey](); //해당 단축키에 대한 액션 실행
+						wikiActions[ckey].trigger(); //해당 단축키에 대한 액션 실행
+					}				
 
 				}else{
 					console.log(ckey +' 단축키 아님');
