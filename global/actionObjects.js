@@ -91,6 +91,19 @@ var wikiActions = {
 			return $('#personal-info-sidebar .sidebar-collapse')[0] != null ? true : false;
 		}
 	},
+	restrictions : {
+		title : '권한설정',
+		trigger : function(){
+			if($('#action-page-permissions-link')[0]){
+				var evt = document.createEvent('HTMLEvents');
+				evt.initEvent('click', true, true); //type bubbling cancleable
+				$('#action-page-permissions-link')[0].dispatchEvent(evt);
+			}
+		},
+		enabled : function(){
+			return $('#action-page-permissions-link')[0] != null ? true : false;
+		}
+	},
 
 	getList : function(){
 		var list = [];
