@@ -28,7 +28,9 @@ var wikiActions = {
 		trigger : function(){
 			console.log('preview');
 			if($('#previewTab a')[0]){
-				$('#previewTab a').trigger('click');	
+				var evt = document.createEvent('HTMLEvents');
+				evt.initEvent('click', true, true);
+				$('#previewTab a')[0].dispatchEvent(evt);	
 			}			
 		},
 		enabled : function(){
@@ -40,7 +42,9 @@ var wikiActions = {
 		trigger : function(){
 			console.log('richtitle');
 			if($('#wysiwygTab a')[0]){
-				$('#wysiwygTab a').trigger('click');	
+				var evt = document.createEvent('HTMLEvents');
+				evt.initEvent('click', true, true);
+				$('#wysiwygTab a')[0].dispatchEvent(evt);	
 			}			
 		},
 		enabled : function(){
@@ -52,7 +56,9 @@ var wikiActions = {
 		trigger : function(){
 			console.log('markup');
 			if($('#markupTab a')[0]){
-				$('#markupTab a').trigger('click');	
+				var evt = document.createEvent('HTMLEvents');
+				evt.initEvent('click', true, true);
+				$('#markupTab a')[0].dispatchEvent(evt);
 			}			
 		},
 		enabled : function(){
@@ -69,6 +75,20 @@ var wikiActions = {
 		},
 		enabled : function(){
 			return $('#editpageform')[0] != null ? true : false;
+		}
+	},
+	profilelayer : {
+		title : '프로필상자 토글',
+		trigger : function(){
+			console.log('profilelayer');
+			if($('#personal-info-sidebar .sidebar-collapse')[0]){
+				var evt = document.createEvent('HTMLEvents');
+				evt.initEvent('click', true, true); //type bubbling cancleable
+				$('#personal-info-sidebar .sidebar-collapse')[0].dispatchEvent(evt);
+			}
+		},
+		enabled : function(){
+			return $('#personal-info-sidebar .sidebar-collapse')[0] != null ? true : false;
 		}
 	},
 
