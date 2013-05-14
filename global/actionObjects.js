@@ -37,7 +37,7 @@ var wikiActions = {
 			return $('#previewTab a')[0] != null ? true : false;
 		}
 	},
-	richtitle : {
+	richtext : {
 		title : '리치텍스트',
 		trigger : function(){
 			console.log('richtitle');

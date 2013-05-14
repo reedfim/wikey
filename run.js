@@ -7,6 +7,12 @@ commander.init();
 register.init();
 indicator.init();
 
+//옵저버 추가
+O.addObserver('register').add(register.updateKeyData).add(register.active).add(register.deactive);
+O.addObserver('commander').add(commander.updateKeyData).add(commander.active).add(commander.deactive);
+O.addObserver('indicator').add(indicator.show);
+
+
 var CURRENT_MODE = MODE_TYPE.CMD;
 
 

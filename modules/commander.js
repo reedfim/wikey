@@ -59,20 +59,20 @@ var commander = (function(){
 
 
 	//Initialized
-	function _init(  ){
+	function init(  ){
 		cmdData = {};
 		$.each(wikiActions.getList(), function(i, name){
 			cmdData[name] = storageData.get(name);
 		});
 		console.log(cmdData);		
-
-		//옵저버 추가
-		O.addObserver('commander').add(updateKeyData).add(active).add(deactive);
 	};
 
 	return {
-		init : _init
-	}
+		init : init,
+		updateKeyData : updateKeyData,
+		active : active,
+		deactive : deactive
+	};
 
 })();
 

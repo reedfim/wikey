@@ -46,10 +46,10 @@ var Observers = (function(){
 				if(chkIds[0] === '*' ){ // *.funcname
 					for(var o in _obs_){
 						if(chkIds[1] && chkIds[1] !== '*'){
-							console.log('*.x');
+							//console.log('*.x');
 							_obs_[o][chkIds[1]] && _obs_[o][chkIds[1]].call(_ref_obs_[o], data);
 						}else{
-							console.log('*.* or *');
+							//console.log('*.* or *');
 							$.each(_obs_[o], function(i, func){
 								func.call(_ref_obs_[o], data);
 							});
@@ -57,7 +57,7 @@ var Observers = (function(){
 					}
 				}else{
 					var eachObserver = _obs_[chkIds[0]];
-					console.log('X.x or X');
+					//console.log('X.x or X');
 					if(eachObserver && chkIds[1]){
 						eachObserver[chkIds[1]] && eachObserver[chkIds[1]].call(_ref_obs_[chkIds[0]], data);
 					}else{
@@ -68,7 +68,7 @@ var Observers = (function(){
 				}			
 			
 			}else if( obId && $.type(obId) === 'object' && !data){ //golbal
-				console.log(' obid empty');
+				//console.log(' obid empty');
 				var tempData = obId;
 				for(var o in _obs_){
 					$.each(_obs_[o], function(i, func){

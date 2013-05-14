@@ -14,7 +14,8 @@
   "content_scripts": [{
     "matches": ["http://play.daumcorp.com/*"],
     "js": [
-            "lib/jquery-1.9.1.min.js", 
+            "lib/jquery-1.9.1.min.js",
+            "lib/underscore-1.4.4.min.js", 
             "Observer.js", 
             "global/actionObjects.js",
             "global/common.js",
