@@ -3,7 +3,7 @@
 
   "name": "Wikey",
   "description": "you will be able to more easily use the WIKI",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "background": {
     "scripts": ["background.js"]
   },
