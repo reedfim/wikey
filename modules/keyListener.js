@@ -9,7 +9,7 @@ var keyListener = (function(){
 		
 
 	function listen(){
-		console.log('bind keydown event');
+		//console.log('bind keydown event');
 		//등록된 Key Event handler를 없애고, 재 등록한다.
 		$(window).on('keydown', function(e){
 			

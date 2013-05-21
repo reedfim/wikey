@@ -6,7 +6,7 @@ var indicator = (function indicator(){
 
 	function show( obsData ){
 		if(obsData.type === O.type.SHOW_INDICATOR){
-			console.log('#################### '+obsData.title+' #####################');
+			//console.log('#################### '+obsData.title+' #####################');
 			$panel.show();
 			$indicator.html(obsData.title);
 			$indicator.fadeIn('fast', function(){

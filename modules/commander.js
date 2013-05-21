@@ -20,7 +20,7 @@ var commander = (function(){
 					count++;
 				}
 				if(isAction && count === cmd.keyCnt){ //cmd.actions라는 데이터가 없을때는 무조건 명령이 실행되는 버그가 있다. 수정하자.
-					console.log(ckey +' 명령실행');
+					//console.log(ckey +' 명령실행');
 					if(wikiActions[ckey].enabled()){
 						O.notifyObserver('indicator',{
 							type : O.type.SHOW_INDICATOR,
@@ -31,7 +31,7 @@ var commander = (function(){
 					}				
 
 				}else{
-					console.log(ckey +' 단축키 아님');
+					//console.log(ckey +' 단축키 아님');
 				}
 			}
 		}
@@ -64,7 +64,7 @@ var commander = (function(){
 		$.each(wikiActions.getList(), function(i, name){
 			cmdData[name] = storageData.get(name);
 		});
-		console.log(cmdData);		
+		//console.log(cmdData);		
 	};
 
 	return {

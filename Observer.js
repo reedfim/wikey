@@ -19,7 +19,7 @@ var Observers = (function(){
 					if(func && $.type(func) === 'function'){
 						eachObserver[func.name || new Date().getTime()] = func;
 					}
-					console.log(eachObserver);
+					//console.log(eachObserver);
 
 					return this;			
 				},

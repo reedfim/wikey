@@ -34,7 +34,7 @@ var register = (function Register(){
 			O.notifyObserver('commander.deactive', {
 				type : O.type.DEACTIVE_CMD
 			});
-			console.log('show view');
+			//console.log('show view');
 			if($viewPanel == null) return;
 
 			$viewPanel.removeClass('hide');
@@ -47,7 +47,7 @@ var register = (function Register(){
 	//로컬스토리지에 데이터를 저장한다.
 	function deactive( obsData ){
 		if(obsData.type === O.type.DEACTIVE_REG){
-			console.log('close view');
+			//console.log('close view');
 			if($viewPanel == null) return;
 			
 			$viewPanel.addClass('hide');
@@ -165,19 +165,17 @@ var register = (function Register(){
 		//저장하기 - 저장한 후 창을 바로 닫음
 		$('#wikeyPanel .btn_ok').on('click', function(e){
 			e.stopPropagation();
-			console.log('$$$$$$$$$',$(this).parent().hasClass('show'));
 			if( !$(this).parent().hasClass('show') ){ return;} //이벤트가 발동된 버튼의 상위 노드가 .edit.show인 클래스 값을 가질때만 동작한다.
 
 			var $text = $(this).prev();
 			var cmdText = $.trim($text.html());
-			console.log(cmdText);
-			console.log($(this).parent().hasClass('show'));
+
 			if(cmdText !== ''){
 				saveData($text.closest('.box_area').data('name'), cmdText);
-				O.notifyObserver('indicator',{
-					type : O.type.SHOW_INDICATOR,
-					title : '저장 했어욤.'
-				});
+				// O.notifyObserver('indicator',{
+				// 	type : O.type.SHOW_INDICATOR,
+				// 	title : '저장 했어욤.'
+				// });
 
 				var $wrap = $(this).closest('.wrap_shortcut').removeClass('active');
 				$(this).closest('.box_area').data('keystr',cmdText.replace(/\s\+\s/g,'|'));
@@ -189,7 +187,7 @@ var register = (function Register(){
 			}else{
 				O.notifyObserver('indicator',{
 					type : O.type.SHOW_INDICATOR,
-					title : '단축키가 엄서욤.'
+					title : '단축키가 없네요~'
 				});
 			}
 		});
@@ -200,10 +198,10 @@ var register = (function Register(){
 			var name = $(this).closest('.box_area').data('name');
 			if(name && (name !== '')){
 				removeData(name);
-				O.notifyObserver('indicator',{
-					type : O.type.SHOW_INDICATOR,
-					title : '삭제 됬어욤.'
-				});
+				// O.notifyObserver('indicator',{
+				// 	type : O.type.SHOW_INDICATOR,
+				// 	title : '삭제 됬어욤.'
+				// });
 
 				var $wrap = $(this).closest('.wrap_shortcut');
 				$(this).closest('.box_area').data('keystr','');

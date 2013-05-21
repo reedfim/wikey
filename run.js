@@ -1,5 +1,5 @@
 //초기화
-console.log('init');	
+console.log('wikey init');	
 
 //모듈 초기화
 keyListener.listen();
@@ -25,7 +25,7 @@ O.notifyObserver('*.active', {
 chrome.runtime && chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse){
 		var start = request.data.start;
-		console.log(typeof start);
+		
 		if(start && CURRENT_MODE === 'CMD'){ //커맨드모드였다면 뷰어로
 			CURRENT_MODE = "REG";
 		}else if(start && CURRENT_MODE=== 'REG'){ //뷰어모드 였다면 커맨드로
