@@ -143,10 +143,13 @@ var register = (function Register(){
 		$('#wikeyPanel .box_area').on('click', function(e){
 			e.stopPropagation();
 			var $target = $(this);
+			var $currentTarget = $(e.currentTarget);
 			
 			if(prevClickedName === '' || prevClickedName !== $target.data('name')){
 				$target.parent().find('.wrap_shortcut').removeClass('active');
-
+				$currentTarget.parent().find('.box_area').removeClass('on');
+				
+				$currentTarget.addClass('on');
 				var $wrap = $target.find('.wrap_shortcut').addClass('active');
 				$wrap.find('.show .text').html($target.data('keystr').replace(/\|/g,' + '));//데이터가 변경됬을 수도 있기 대문에 새로 덮어 씌운다.-class가 show인 노드에.
 				
@@ -157,6 +160,7 @@ var register = (function Register(){
 				prevClickedName = $target.data('name');
 			}else{
 				$target.parent().find('.wrap_shortcut').removeClass('active');
+				$currentTarget.parent().find('.box_area').removeClass('on');
 				prevClickedName = '';
 			}
 			
@@ -178,7 +182,7 @@ var register = (function Register(){
 				// });
 
 				var $wrap = $(this).closest('.wrap_shortcut').removeClass('active');
-				$(this).closest('.box_area').data('keystr',cmdText.replace(/\s\+\s/g,'|'));
+				$(this).closest('.box_area').removeClass('on').data('keystr',cmdText.replace(/\s\+\s/g,'|'));
 				$(this).prev().html('');
 				$wrap.find('.edit').removeClass('show').addClass('hide');
 				$wrap.find('.view').removeClass('hide').addClass('show');
@@ -223,6 +227,7 @@ var register = (function Register(){
 		$('#wikeyPanel').on('click', function(e){
 			e.stopPropagation();
 			$('#wikeyPanel .wrap_shortcut').removeClass('active') //취소
+			$('#wikeyPanel .box_area').removeClass('on')
 			prevClickedName = '';
 		});
 		$(window).off('keyup', keyUpToSaveCancel).on('keyup', keyUpToSaveCancel);

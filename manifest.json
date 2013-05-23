@@ -3,7 +3,7 @@
 
   "name": "Wikey",
   "description": "you will be able to more easily use the WIKI",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "icons": {
     "48": "icon/icon_48.png",
     "128": "icon/icon_128.png"
