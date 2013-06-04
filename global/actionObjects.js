@@ -69,12 +69,14 @@ var wikiActions = {
 		title : '저장하기',
 		trigger : function(){
 			console.log('save');
-			if($('#editpageform')[0]){
-				$('#editpageform').submit();	
+			if($('input[name=confirm]')[0]){
+				var evt = document.createEvent('HTMLEvents');
+				evt.initEvent('click', true, true);
+				$('input[name=confirm]')[0].dispatchEvent(evt);
 			}			
 		},
 		enabled : function(){
-			return $('#editpageform')[0] != null ? true : false;
+			return $('input[name=confirm]')[0] != null ? true : false;
 		}
 	},
 	profilelayer : {
