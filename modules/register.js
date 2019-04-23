@@ -8,8 +8,6 @@ var register = (function Register(){
 		$selectedInpBox = null,
 		prevClickedName = ''; //이전에 클릭한 box_area가 있는지 name값을 통해 가지고 있는 변수
 		
-
-
 	//키 입력이 되었을때 반응하는 함수
 	function updateKeyData( obsData ){
 		if(obsData.type === O.type.KEY_IN_REG){
