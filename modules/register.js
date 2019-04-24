@@ -27,8 +27,8 @@ var register = (function Register(){
 		}
 	};
 	//로컬스토리지에서 데이터를 빼오고,
-	function active( obsData ){
-		if(obsData.type === O.type.ACTIVE_REG){
+	function active ( obsData ) {
+		if (obsData.type === O.type.ACTIVE_REG) {
 			O.notifyObserver('commander.deactive', {
 				type : O.type.DEACTIVE_CMD
 			});
@@ -43,7 +43,7 @@ var register = (function Register(){
 	};
 
 	//로컬스토리지에 데이터를 저장한다.
-	function deactive( obsData ){
+	function deactive ( obsData ) {
 		if(obsData.type === O.type.DEACTIVE_REG){
 			//console.log('close view');
 			if($viewPanel == null) return;
@@ -54,7 +54,7 @@ var register = (function Register(){
 			$(window).off('keyup', keyUpToSaveCancel);
 		}
 	};
-
+	
 	function saveData( menu, dataStr ){
 		if(menu && dataStr){
 			var cmd = dataStr.split(' + ');
